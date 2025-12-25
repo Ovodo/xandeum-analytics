@@ -53,7 +53,7 @@ The dashboard integrates with Xandeum's pRPC (Provider RPC) to fetch pNode data 
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/xandeum-analytics.git
+git clone https://github.com/ovodo/xandeum-analytics.git
 cd xandeum-analytics
 ```
 
@@ -116,33 +116,6 @@ Create a `.env.local` file to configure custom endpoints:
 ```env
 NEXT_PUBLIC_PRPC_ENDPOINT=https://apis.devnet.xandeum.com
 ```
-
-## 📖 API Endpoints
-
-### GET /api/pnodes
-
-Fetches pNode data from the Xandeum network.
-
-**Response:**
-```json
-{
-  "success": true,
-  "data": [...pNodes],
-  "source": "https://apis.devnet.xandeum.com"
-}
-```
-
-## 🎨 Screenshots
-
-### Dashboard
-- Network statistics overview
-- Interactive charts for storage and uptime distribution
-- Searchable and filterable pNode list
-
-### Node Detail
-- Detailed node information
-- Historical storage usage charts
-- Response latency metrics
 
 ## 🤝 Contributing
 
