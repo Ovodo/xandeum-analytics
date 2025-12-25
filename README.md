@@ -1,36 +1,163 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Xandeum pNode Analytics Dashboard
 
-## Getting Started
+A real-time analytics platform for monitoring Xandeum storage provider nodes (pNodes). Built for the Xandeum Hackathon.
 
-First, run the development server:
+## 🚀 Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Real-time Network Stats**: View total nodes, active nodes, storage capacity, and network health at a glance
+- **Interactive Charts**: 
+  - Top Storage Providers (Bar Chart)
+  - Version Distribution (Pie Chart)
+  - Uptime Distribution (Area Chart)
+- **pNode List with Filtering**: Search, filter by status, and sort by various metrics
+- **Individual Node Details**: Click on any pNode to see detailed information and historical charts
+- **Auto-refresh**: Data automatically refreshes every 30 seconds
+- **Responsive Design**: Works on desktop and mobile devices
+
+## 🛠️ Tech Stack
+
+- **Framework**: Next.js 16 (App Router)
+- **Styling**: Tailwind CSS 4
+- **Charts**: Recharts
+- **Animations**: Framer Motion
+- **Notifications**: React Hot Toast
+- **Language**: TypeScript
+
+## 📡 pRPC Integration
+
+The dashboard integrates with Xandeum's pRPC (Provider RPC) to fetch pNode data using the `get-pods-with-stats` method. The API returns:
+
+```json
+{
+  "address": "109.199.96.218:9001",
+  "is_public": true,
+  "last_seen_timestamp": 1765204349,
+  "pubkey": "2asTHq4vVGazKrmEa3YTXKuYiNZBdv1cQoLc1Tr2kvaw",
+  "rpc_port": 6000,
+  "storage_committed": 104857600,
+  "storage_usage_percent": 0.024,
+  "storage_used": 26069,
+  "uptime": 3271,
+  "version": "0.7.0"
+}
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🏃 Getting Started
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Prerequisites
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Node.js 18+
+- npm or yarn
 
-## Learn More
+### Installation
 
-To learn more about Next.js, take a look at the following resources:
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/xandeum-analytics.git
+cd xandeum-analytics
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. Install dependencies:
+```bash
+npm install
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3. Start the development server:
+```bash
+npm run dev
+```
 
-## Deploy on Vercel
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Production Build
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run build
+npm start
+```
+
+## 📁 Project Structure
+
+```
+src/
+├── app/
+│   ├── api/
+│   │   └── pnodes/
+│   │       └── route.ts      # API proxy for pRPC calls
+│   ├── node/
+│   │   └── [pubkey]/
+│   │       └── page.tsx      # Individual node detail page
+│   ├── layout.tsx            # Root layout with providers
+│   ├── page.tsx              # Main dashboard page
+│   └── globals.css           # Global styles
+├── lib/
+│   └── api.ts                # pRPC client and utility functions
+└── types/
+    └── pnode.ts              # TypeScript interfaces
+```
+
+## 🎯 Key Metrics Displayed
+
+| Metric | Description |
+|--------|-------------|
+| Total pNodes | Total number of storage provider nodes |
+| Active Nodes | Nodes seen in the last 5 minutes |
+| Total Storage | Combined storage capacity across all nodes |
+| Used Storage | Currently utilized storage |
+| Avg Uptime | Average uptime across all nodes |
+| Network Health | Overall network status indicator |
+
+## 🔧 Configuration
+
+### Environment Variables (Optional)
+
+Create a `.env.local` file to configure custom endpoints:
+
+```env
+NEXT_PUBLIC_PRPC_ENDPOINT=https://apis.devnet.xandeum.com
+```
+
+## 📖 API Endpoints
+
+### GET /api/pnodes
+
+Fetches pNode data from the Xandeum network.
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": [...pNodes],
+  "source": "https://apis.devnet.xandeum.com"
+}
+```
+
+## 🎨 Screenshots
+
+### Dashboard
+- Network statistics overview
+- Interactive charts for storage and uptime distribution
+- Searchable and filterable pNode list
+
+### Node Detail
+- Detailed node information
+- Historical storage usage charts
+- Response latency metrics
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📜 License
+
+MIT License - see LICENSE file for details.
+
+## 🔗 Links
+
+- [Xandeum Documentation](https://docs.xandeum.network)
+- [Xandeum Discord](https://discord.gg/uqRSmmM5m)
+- [Xandeum Website](https://xandeum.network)
+
+---
+
+Built with ❤️ for the Xandeum Hackathon
